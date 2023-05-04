@@ -83,9 +83,9 @@ class App extends React.Component {
         ImageUrl: this.state.ImageUrl
       })
     })
-      .then(response => response.json()) // <-- Fix here
+      .then(response => response.json())
       .then(result => {
-        if (result && result.outputs && result.outputs.length > 0) {
+        if (result.status.description === 'Ok') {
             fetch('https://smartbrainserver-fhye.onrender.com/image', {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
@@ -118,7 +118,6 @@ class App extends React.Component {
 
   calculateNumParticles = () => {
     const screenWidth = window.innerWidth;
-    console.log(screenWidth)
     let numParticles = 0;
 
     if (screenWidth >= 1200) {
